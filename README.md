@@ -1,15 +1,23 @@
-# word2vec model 有兩個.. 1個light version size不足200 m ...但準確度合理.... 若一個是heavy version因為size逾500m...因此. ,現在透過skype發給你們. .因為wechat不容許size >500 傳送
+## Introduction of gensim word2vec model
+Please refer to this url : https://towardsdatascience.com/a-beginners-guide-to-word-embedding-with-gensim-word2vec-model-5970fa56cc92
+
+This repository focuses on how to train and deploy a self-developed word2vec model to reflect the word semantic relationship for Traditional Chinese Financial news.
+
+## Background of this word2vec model
+
+To balance between training and deployment, we use two differents set of open libraries for model training and deployment, respectively.
+training: [gensim](https://github.com/RaRe-Technologies/gensim)
+deployment: [pymagnitude](https://github.com/plasticityai/magnitude) for model format conversion and [pymagnitude-light](https://github.com/davebulaval/magnitude-light) for loading of trained model.
+ 
+## why use [gensim](https://github.com/RaRe-Technologies/gensim) for model training?
+[gensim](https://github.com/RaRe-Technologies/gensim) is designed to process raw, unstructured digital texts (”plain text”) using unsupervised machine learning algorithms.
+
+The algorithms in Gensim, such as Word2Vec, FastText, etc, automatically discover the semantic structure of documents by examining statistical co-occurrence patterns within a corpus of training documents. 
+
+Gensim is fully optimized to train a word embedding/word2vec model on local CPU environment(Non-GPU) with large dataset. Given the optimization of open-library, the training will take about 30 mins to complete based on the training dataset in the data folder 
 
 
-首先必須強調, 訓練及deployment所使用的open-library是不同的.
-
-train: openlibrary 使用gensim 因為其可以在no GPU環境下進行大量語料training 而且速度很快.. 即使有幾十萬row的data..也可以半小時之內在cpu環境下完成訓練.....
-github內的model 已有zip version
-
-
-[gensim] 是專門訓練word2vec model的高速open -library....
-
-即使在你們Local機上, 只有data齊全. 一樣可以輕易進行training
+ 
 
 半小時即可..當然.在training 期間.. Local machine may be slowed down a bit...但你可以在訓練之前......調教使用多少個cpu core來訓練. 但首先你們要有google drive account請先登記
 
