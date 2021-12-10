@@ -49,28 +49,25 @@ For the script and command line to convert gensim  to magnitude format, please r
 For the detail of how to deploy word2vec model by  [pymagnitude](https://github.com/plasticityai/magnitude) and   and [pymagnitude-light](https://github.com/davebulaval/magnitude-light), please refer to the [deployment.py](https://github.com/etnetapp-dev/nlp_w2v_model/deployment.py)
 
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+## Training of word2vec by gensim
 
+### Training dataset
 
+If local RAM is large enough, please increase the size of training data and data variety in order to achieve higher model accuracy.
 
-現在可以開始解釋.  如何training一個word2vec model.
-
-如果local machine的內存足夠, 應盡量使用更多的語料...語料越多, 訓練出來的Model越準
-
-我在github內已把三個資料來源,進行分詞及處理, 包括:
-1. THUCNews (這是內地許多大專用來訓練或測試NLP程序專用的新聞語料, 我只集中選取了財經新聞、遊戲(因為騰訊是網上遊戲公司).  以及時尚的新聞(因為經濟通Lifestyle 有部份內容是針對時尚新聞)
-
+In this repository, the training dataset is the combination of three dataset sources 
+1. THUCNews (a well-known and widely used NLP dataset containing news articles about finance, gaming, fashion). The dataset can be easily searched and downloaded from internet
+ 
 ### ThUCnews dataset from internet
 ![](pic/thunews_dataset_search.JPG)
   
-2. 經濟通lifestyle內的針對財經新聞的文章
+2. [Financial related articles from etnet lifestyle columns](https://github.com/etnetapp-dev/nlp_w2v_model/tree/master/data/lifestyle_finance/tokens)
 
-3. 經濟通2018-2020的製造的財經新聞
+3. [selected ETNET financial news articles produced between 2018 and 2020](https://github.com/etnetapp-dev/nlp_w2v_model/tree/master/data/etnet_news/tokens)
 
-如果句子內同時出現中文及英文, 也可以空隔作分隔, 但需要留意, 英文詞語是否專有名詞. 例如,  Donald Trump 等,, 應該把兩個英文字合併成一個單詞 DonaldTrump處理
-
-有部份專有名詞是否採用空格分開, 或是合拼處理.... 可能需要人手作鑑定
-
-
+### data preparation
 
 
 
@@ -94,6 +91,11 @@ word2vec model training的input 只可以是 list of string or string ...
 ### Example of training dataset
 ![](pic/training_dataset.JPG)    
   
+ 
+如果句子內同時出現中文及英文, 也可以空隔作分隔, 但需要留意, 英文詞語是否專有名詞. 例如,  Donald Trump 等,, 應該把兩個英文字合併成一個單詞 DonaldTrump處理
+
+有部份專有名詞是否採用空格分開, 或是合拼處理.... 可能需要人手作鑑定
+
   
 我在製造語料數據時, 也花了好幾天, 用內眼去鑑定部份語料,  不可能做到100%準確, 但可提升詞語之間的準繩度
 
