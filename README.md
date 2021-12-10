@@ -7,12 +7,14 @@ train: openlibrary 使用gensim 因為其可以在no GPU環境下進行大量語
 github內的model 已有zip version
 
 
-gensim 是專門訓練word2vec model的高速open -library....
+[gensim] 是專門訓練word2vec model的高速open -library....
 
 即使在你們Local機上, 只有data齊全. 一樣可以輕易進行training
 
 半小時即可..當然.在training 期間.. Local machine may be slowed down a bit...但你可以在訓練之前......調教使用多少個cpu core來訓練. 但首先你們要有google drive account請先登記
 
+# CCASS workflow
+![](pic/OAPI.jpg)
 
 jupyter notebook內. 5.2 部份. 
 
