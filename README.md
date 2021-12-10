@@ -68,25 +68,18 @@ In this repository, the training dataset is the combination of three dataset sou
 3. [selected ETNET financial news articles produced between 2018 and 2020](https://github.com/etnetapp-dev/nlp_w2v_model/tree/master/data/etnet_news/tokens)
 
 ### data preparation
+- input format of word2vec model : list of string list.
+- raw string or text data cannot be directly used as model input
 
-
-
-
-
-word2vec model training的input 只可以是 list of string or string ...
-
-因此, 不能把未經過處理的中文句子或段落直接, 用作訓練之用。
-
-以中文文章為例. 所以用來訓練的Input data ,必須經過三步處理:
-1. 把文章分段成為句子, 可以句號或其他分割完整的句子的標點符號, 作為seperator
-2. 把句子進行分詞(word segementation或 tokenization)  . 使句子變成 以空格分開的中文詞語.  建議使用結巴作為分詞工具..
-3. 在完成分詞後, 把標點符號從文檔中移除, 包括, 包號, 逗號, 分號、感嘆號等...只留下文字部份.
-
-在完成三個step後.  training dataset應該變成這個模樣:
-
-文檔中每一行為一句.
-
-每句之內, 每個詞語以空隔分開.
+The pre-processing of Chinese text training dataset includes:
+1. Seperate each articles into paragraph
+2. split paragraphs into sentences by using Punctuation Marks, e.g. Comma,  Dash, Ellipsis, full-stop,etc.
+3. Inplement word segmentation or tokenization on each sentences by using jieba open-library with our self-built [jieba user dictionary](https://github.com/etnetapp-dev/nlp_w2v_model/userdict.txt)
+4. Remove the seperator punctuation (note: some punctuations can be retained in order to maintain a complete meaning of the words, e.g. Brackets,  Colon, etc.)
+ 
+The post-proprocessing training dataset should be in the following format:
+- Each line is one indepedent sentence
+- Words are split off by spaces.  
 
 ### Example of training dataset
 ![](pic/training_dataset.JPG)    
