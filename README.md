@@ -29,33 +29,24 @@ We strongly advise to use google colab platform for training to reduce the resou
 ![](pic/workers.JPG)
  
 
+## why use pymagnitude for deployment?
+
+Gensim word2vec model cannot handle out-of-vocabulary (OOV) issue. The gensim-based model will raise error when the input string contains new terms and vocabularies which do not exist in the model dictionary stored in the model file. (e.g. NFT , Metaverse, etc)
+
+To alleviate the OOV problem, we convert the gensim word2vec model to magnitutde format and load the model by [pymagnitude](https://github.com/plasticityai/magnitude) as pymagnitude is designed to load word2vec model with OOV strings as input and it intreprets OOV based on the sequences of characters.
 
 
+### The commmand line for model conversion
+>  general:     python -m pymagnitude.converter -i <PATH TO FILE TO BE CONVERTED> -o <OUTPUT PATH FOR MAGNITUDE FILE>
+>  this repository:    python -m pymagnitude.converter -i  \word2vec_training\model\gensim\etnet_w2v.bin   -o  \word2vec_training\model\magnitude\boc_app_heavy.magnitude 
 
 
-
-
-這便是因為OOV問題... 而要把訓練model 及deploy model分別使用兩個不同的open library的理由.
-train :gensim 
-model conversion:  python -m pymagnitude.converter -i <PATH TO FILE TO BE CONVERTED> -o <OUTPUT PATH FOR MAGNITUDE FILE>
-deployment : pymagnitude 
-
-
-
-deployment則要另一個open library : https://github.com/plasticityai/magnitude
-
-因為gensim 有一個缺點: gensim 所訓練出來的word2vec model. input一定是文字或中文詞語, 即string or list of string . 問題是, 如果該中文詞語是訓練時沒有出現的新詞語. 如近年提及的NFT或元宇宙等..則Gensim model會出現out-of-vocabulary (OOV)的情況, 使Model無法對新詞進行 vectorization
-
-因此. 使用 https://github.com/plasticityai/magnitude 這個open-library就是針對OOV這個問題, 而採用的Deployment open -library
-
-只要按照pymagnitude documentation內的指示. 把gensim 所訓練出來的Model 轉換成pymagnitude所採用的格式.  然後在deployment script 採用 轉換後的model ..便可... 
-
+For the script and command line to convert gensim  to magnitude format, please refer to the github page of [pymagnitude](https://github.com/plasticityai/magnitude)
+ 
 ### Gensim model conversion to magnitude
-![](pic/model_conversion.JPG)
+![](pic/model_conversion.JPG) 
   
-在我的個案 我便採用這句command :   python -m pymagnitude.converter -i  word2vec_training\model\gensim\etnet_w2v.bin   -o  C:\Users\marcus\PycharmProjects\word2vec_training\model\magnitude\boc_app_heavy.magnitude 
-
-而如何透過pymagnitude 這個Open library 而deployment word2vec model (boc_app_heavy.magnitude )   請看deployment.py script
+For the detail of how to deploy word2vec model by  [pymagnitude](https://github.com/plasticityai/magnitude) and   and [pymagnitude-light](https://github.com/davebulaval/magnitude-light), please refer to the [deployment.py](https://github.com/etnetapp-dev/nlp_w2v_model/deployment.py)
 
 
 
