@@ -129,33 +129,40 @@ Section 5.5 in jupyter notebook are the codes to store the trained model into lo
 ### gensim model test
 ![](pic/gensim_model_test.JPG)
   
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ### Model type conversion
 
-但最重要... 即使model 效果良好, 但不要馬上在deployment上使用, 
-因為gensim word2vec model有嚴重的OOV 問題... 即不能對部份新詞作出處理......強行使用會出現Error 情況, 因此必須把gensim model convert成為magnitude 模式..... 
-然後使用pymagnitude-light 這個openlibrary進行deployment
+The final step before deployment is model format conversion from gensim to magnitude.
+ 
+Please only deploy the model after conversion in order to avoid out-of-vocabulary (OOV) error.
+ 
+Compared to [Gensim](https://github.com/RaRe-Technologies/gensim), [pymagnitude](https://github.com/plasticityai/magnitude) could capture the semantic meaning of Chinese words by converting string to high-dimensional vector spaces and also resolve OOV error by interpreting OOV by the sequences of characters from the word2vec model.
 
-你們會發現, 這裏有兩個pymagnitutde 的openlibrary
-1. pymagnitude (https://github.com/plasticityai/magnitude)
-2. pymagnitutde -light (https://github.com/davebulaval/magnitude-light)
+Thus, we use two sets of magnitude open-library for model conversion and deployment  
+1. pymagnitude (https://github.com/plasticityai/magnitude) - official version of magnitutde
+2. pymagnitutde -light (https://github.com/davebulaval/magnitude-light) - folk and light version of offical magnitutde
 
+ ### why we need two versions of pymagnitude 
 
-現在解釋為何需要兩個不同的pymagnitude 
+The official version of [pymagnitude](https://github.com/plasticityai/magnitude) provides comprehensive sets of functions on model training, conversion and deployment but the library is large size and very resource comsumable in deployment environment.
+ 
+To ease the workload of deployment, we instead use the folk and light version of pymagnitude, [pymagnitutde-light](https://github.com/davebulaval/magnitude-light) on UAT and production environment.
+ 
+The official [pymagnitude](https://github.com/plasticityai/magnitude) is only used for converting the gensim word2vec model from binary format to magnitude format.
 
-因為原始版本的pymagnitude (https://github.com/plasticityai/magnitude)  功能最齊全....所以應使用它作為工具, 把gensim word2vec model 轉換成 magnitude format.
+### Model format conversion
+- general:     python -m pymagnitude.converter -i <PATH TO FILE TO BE CONVERTED> -o <OUTPUT PATH FOR MAGNITUDE FILE>
+- this repository:    python -m pymagnitude.converter -i  etnet_w2v.bin   -o  boc_app_heavy.magnitude 
 
-但原始版本的pymagnitude 是重量級open-library 在deployment運作速度較慢. 因此, 本人只採用原始版本的pymagnitude 把gensim word2vec model 轉換為magnitude format 
+For the script and command line to convert gensim  to magnitude format, please refer to the github page of [pymagnitude](https://github.com/plasticityai/magnitude)
+ 
+### Gensim model conversion to magnitude
+![](pic/model_conversion.JPG) 
+   
 
-然後採用size較細, deployment 速度快得多的pymagnitutde -light (https://github.com/davebulaval/magnitude-light) 進行 model deployment
-
-
-model轉換的方法及command line 剛才已提及過.. 
-
-
-#### deployment :
-deployment 請自行看github 內的deployment.py 
+# deployment :
+Please refer to the codes in [deployment.py](https://github.com/etnetapp-dev/nlp_w2v_model/deployment.py) 
 
 
 
