@@ -6,8 +6,8 @@ This repository focuses on how to train and deploy a self-developed word2vec mod
 ## Background of this word2vec model
 
 To balance between training and deployment, we use two differents set of open libraries for model training and deployment, respectively.
-      training: [gensim](https://github.com/RaRe-Technologies/gensim)
-      deployment: [pymagnitude](https://github.com/plasticityai/magnitude) for model format conversion and [pymagnitude-light](https://github.com/davebulaval/magnitude-light) for loading of trained model.
+-training: [gensim](https://github.com/RaRe-Technologies/gensim)
+-deployment: [pymagnitude](https://github.com/plasticityai/magnitude) for model format conversion and [pymagnitude-light](https://github.com/davebulaval/magnitude-light) for loading of trained model.
  
 ## why use [gensim](https://github.com/RaRe-Technologies/gensim) for model training?
 [gensim](https://github.com/RaRe-Technologies/gensim) is designed to process raw, unstructured digital texts (”plain text”) using unsupervised machine learning algorithms.
