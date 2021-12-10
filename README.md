@@ -84,15 +84,11 @@ The post-proprocessing training dataset should be in the following format:
 ### Example of training dataset
 ![](pic/training_dataset.JPG)    
   
- 
-如果句子內同時出現中文及英文, 也可以空隔作分隔, 但需要留意, 英文詞語是否專有名詞. 例如,  Donald Trump 等,, 應該把兩個英文字合併成一個單詞 DonaldTrump處理
+### Remark in data preprocessing
+- if sentences contain both Chinese and English vocabulary, e.g. Donald Trump, Trump Trump, Alan Greenspan,etc., user can concatenate English words by removing the space, e.g. DonaldTrump, TrumpTrump.
+- Some specific vocabularies can only be proprocessed or identified by manual checking. It is very time consuming and some degree of manual checking is neccessary in order to increase data integrity. For the dataset in the repository, we spent 1 month on both data preprocessing and checking.
+- The post-processing datasets are stored in txt. file with '\n' to split of sentence and space for word segmentation.
 
-有部份專有名詞是否採用空格分開, 或是合拼處理.... 可能需要人手作鑑定
-
-  
-我在製造語料數據時, 也花了好幾天, 用內眼去鑑定部份語料,  不可能做到100%準確, 但可提升詞語之間的準繩度
-
-在完成語料準備後,    可在python script 內, input txt file 然後以'\n' 把句子分別, 再以空格分開每一句句子內的詞語, 結果造成list of string list
 
 
 我在jupyner notebook內已有用作input txt file的function
