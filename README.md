@@ -13,8 +13,7 @@ github內的model 已有zip version
 
 半小時即可..當然.在training 期間.. Local machine may be slowed down a bit...但你可以在訓練之前......調教使用多少個cpu core來訓練. 但首先你們要有google drive account請先登記
 
-# CCASS workflow
-![](pic/OAPI.jpg)
+
 
 jupyter notebook內. 5.2 部份. 
 
@@ -39,6 +38,9 @@ deployment則要另一個open library : https://github.com/plasticityai/magnitud
 
 只要按照pymagnitude documentation內的指示. 把gensim 所訓練出來的Model 轉換成pymagnitude所採用的格式.  然後在deployment script 採用 轉換後的model ..便可... 
 
+### Gensim model conversion to magnitude
+![](pic/model_conversion.JPG)
+  
 在我的個案 我便採用這句command :   python -m pymagnitude.converter -i  word2vec_training\model\gensim\etnet_w2v.bin   -o  C:\Users\marcus\PycharmProjects\word2vec_training\model\magnitude\boc_app_heavy.magnitude 
 
 而如何透過pymagnitude 這個Open library 而deployment word2vec model (boc_app_heavy.magnitude )   請看deployment.py script
@@ -54,6 +56,9 @@ deployment則要另一個open library : https://github.com/plasticityai/magnitud
 我在github內已把三個資料來源,進行分詞及處理, 包括:
 1. THUCNews (這是內地許多大專用來訓練或測試NLP程序專用的新聞語料, 我只集中選取了財經新聞、遊戲(因為騰訊是網上遊戲公司).  以及時尚的新聞(因為經濟通Lifestyle 有部份內容是針對時尚新聞)
 
+### ThUCnews dataset from internet
+![](pic/thunews_dataset_search.JPG)
+  
 2. 經濟通lifestyle內的針對財經新聞的文章
 
 3. 經濟通2018-2020的製造的財經新聞
@@ -83,6 +88,10 @@ word2vec model training的input 只可以是 list of string or string ...
 
 每句之內, 每個詞語以空隔分開.
 
+### Example of training dataset
+![](pic/training_dataset.JPG)    
+  
+  
 我在製造語料數據時, 也花了好幾天, 用內眼去鑑定部份語料,  不可能做到100%準確, 但可提升詞語之間的準繩度
 
 在完成語料準備後,    可在python script 內, input txt file 然後以'\n' 把句子分別, 再以空格分開每一句句子內的詞語, 結果造成list of string list
@@ -90,27 +99,39 @@ word2vec model training的input 只可以是 list of string or string ...
 
 我在jupyner notebook內已有用作input txt file的function
 
-
+### dataset input function
+![](pic/input_function.JPG)  
+  
 然後把 幾個 list of string list 合併在一起, 成為一個大集合. 這便是model input
-
+  
+### model input
+![](pic/combine_dataset.JPG)
 
 ### Model training
 只要text input 成為list of string list 以及調教完成hyperparaemters 即可使用5.2-5.3進行訓練.   以github內已完成處理的語料, 在local machine 大概需時半小時. 
 
-然後按照jupyter notebook 第五部份.. 自行調校訓練model 所需的hyper-parameter
-https://blog.csdn.net/szlcw1/article/details/52751314
+然後按照jupyter notebook 第五部份.. 自行調校訓練model 所需的hyper-parameter , For the meaning of hyper-parameter, please refer to this url: https://blog.csdn.net/szlcw1/article/details/52751314
+
+### definition of Hyperparameters
+![](pic/hyper.JPG )
+ 
 
 我試過把size調升至500  發覺分別不大
 
 然後在5.2-5.3 部份便是已寫好的model training 主要部份
 
 5.5 部份便是把完成訓練的Model 存放在local machine 內指定位置  完成訓練的word2vec model....最主要的是.etnet_w2v.bin   因為bin file size較細... 使用時速度較良好
-
+  
+### gensim model after training
+![](pic/gensim_model_results.JPG)
 
 在完成訓練gensim word2vec model後. 建議不要馬上儲存. 應該在jupyter notebook 內, 對Model進行簡單測試... 如下圖
 
 如上圖指,  輸入「陳志全」. 看看AI Model能否辨別出, 哪幾個詞語跟「陳志全」關係最密切, 結果出來以下字眼
-
+  
+### gensim model test
+![](pic/gensim_model_test.JPG)
+  
 如果output字眼, 跟input字眼關係不大密切, 即model 效果欠佳. 建議先更改hyperparameter的設定,, 例如提升iter 次數, 或 減少window_size
 
 
