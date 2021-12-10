@@ -17,19 +17,23 @@ The algorithms in Gensim, such as Word2Vec, FastText, etc, automatically discove
 Gensim is fully optimized to train a word embedding/word2vec model on local CPU environment(Non-GPU) with large dataset. Given the optimization of open-library, the training will take about 30 mins to complete based on the training dataset in the data folder 
 
 
+
+
+
+## Model training environment
+To reduce the consumption of computing resources during the model training process, user can fine-tune the numbers of workers in the instantiation of Word2Vec model shown below. 
+
+We strongly advise to use google colab platform for training to reduce the resource burden of local machine. Please remember to register a google drive account before using google colab. Please remind no need to change instance to GPU when using gensim for word2vec model training as Gensim is cpu-only applicable.
+
+### hyperparameter to control computing resources
+![](pic/workers.JPG)
  
 
-半小時即可..當然.在training 期間.. Local machine may be slowed down a bit...但你可以在訓練之前......調教使用多少個cpu core來訓練. 但首先你們要有google drive account請先登記
 
 
 
-jupyter notebook內. 5.2 部份. 
 
-workers= no. of cpu cores to be used for training the model
 
-如果把workers數目減少. .可減輕local machine 的負擔.. 但同時, 會減慢training 速度...這個你們需要衡量
-
-我在google colab進行training則沒有這方面的擔心.. 可全力使用所有colab上的cpu cores進行訓練
 
 這便是因為OOV問題... 而要把訓練model 及deploy model分別使用兩個不同的open library的理由.
 train :gensim 
