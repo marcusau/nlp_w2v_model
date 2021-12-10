@@ -89,45 +89,46 @@ The post-proprocessing training dataset should be in the following format:
 - Some specific vocabularies can only be proprocessed or identified by manual checking. It is very time consuming and some degree of manual checking is neccessary in order to increase data integrity. For the dataset in the repository, we spent 1 month on both data preprocessing and checking.
 - The post-processing datasets are stored in txt. file with '\n' to split of sentence and space for word segmentation.
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+### loading training dataset in jupyter note book 
 
-
-我在jupyner notebook內已有用作input txt file的function
+There are two python functions for loading training datasets from txt. files to python scripts and please specify the data file path when using the jupyter notebook in your local machine or google colab.
 
 ### dataset input function
 ![](pic/input_function.JPG)  
   
-然後把 幾個 list of string list 合併在一起, 成為一個大集合. 這便是model input
+After loading the dataset by the defined functions, the datasets format will be list of string list. Each item in the list represent one independent sentence and each string list represents a word segment of one sentence. 
   
 ### model input
 ![](pic/combine_dataset.JPG)
 
-### Model training
-只要text input 成為list of string list 以及調教完成hyperparaemters 即可使用5.2-5.3進行訓練.   以github內已完成處理的語料, 在local machine 大概需時半小時. 
+## Model training : setting of hyperparameter
 
-然後按照jupyter notebook 第五部份.. 自行調校訓練model 所需的hyper-parameter , For the meaning of hyper-parameter, please refer to this url: https://blog.csdn.net/szlcw1/article/details/52751314
+After loading training dataset, please specify hyper-parameters in section 5.1 of the jupyter notebook. For the definition of hyper-parameters, lease refer to this url: https://blog.csdn.net/szlcw1/article/details/52751314
 
+Based on our experience, the 30 iter is enough for the exisiting dataset and the model performances are somehow similar by setting size (dimension) at 300-500. 
+ 
 ### definition of Hyperparameters
 ![](pic/hyper.JPG )
  
+## Model Training process
 
-我試過把size調升至500  發覺分別不大
-
-然後在5.2-5.3 部份便是已寫好的model training 主要部份
-
-5.5 部份便是把完成訓練的Model 存放在local machine 內指定位置  完成訓練的word2vec model....最主要的是.etnet_w2v.bin   因為bin file size較細... 使用時速度較良好
+After setting hyperparameters, please run the code in section 5.2-5.3 for model training. The overall training process will take about 30 mins in local machine and 15-20 min in google colab
+ 
+Section 5.5 in jupyter notebook are the codes to store the trained model into local machine or indicated folder path. 
   
 ### gensim model after training
 ![](pic/gensim_model_results.JPG)
 
-在完成訓練gensim word2vec model後. 建議不要馬上儲存. 應該在jupyter notebook 內, 對Model進行簡單測試... 如下圖
+## Remark of model training
+- Please dont save the model immediately after training. Instead, please use the function in section 5.4 in jupyter notebook to test the accuracy of the model
+- If the top N related keywords output by the model are not semantically relevant to the input word, please retrain the model with different sets of hyperparameters e.g. adjusting the window size or changing sg from 0 to 1. 
+- The setting of hyperparameter varies along with dataset and please adopt the try and error method to optimize the setting of model
 
-如上圖指,  輸入「陳志全」. 看看AI Model能否辨別出, 哪幾個詞語跟「陳志全」關係最密切, 結果出來以下字眼
   
 ### gensim model test
 ![](pic/gensim_model_test.JPG)
   
-如果output字眼, 跟input字眼關係不大密切, 即model 效果欠佳. 建議先更改hyperparameter的設定,, 例如提升iter 次數, 或 減少window_size
-
 
 
 ### Model type conversion
