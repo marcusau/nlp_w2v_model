@@ -17,8 +17,13 @@ The algorithms in Gensim, such as Word2Vec, FastText, etc, automatically discove
 Gensim is fully optimized to train a word embedding/word2vec model on local CPU environment(Non-GPU) with large dataset. Given the optimization of open-library, the training will take about 30 mins to complete based on the training dataset in the data folder 
 
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+### Model training workflow
+![](pic/w2v_training.jpg)
 
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Model training environment
 To reduce the consumption of computing resources during the model training process, user can fine-tune the numbers of workers in the instantiation of Word2Vec model shown below. 
@@ -161,6 +166,12 @@ For the script and command line to convert gensim  to magnitude format, please r
 ![](pic/model_conversion.JPG) 
    
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+### Model deployment workflow
+![](pic/w2v_deployment.jpg)
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # deployment :
 Please refer to the codes in [deployment.py](https://github.com/etnetapp-dev/nlp_w2v_model/deployment.py) 
 
